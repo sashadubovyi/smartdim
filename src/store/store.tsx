@@ -11,7 +11,7 @@ import type { AppData, Product, SiteContent, Contacts } from '../types';
 import { SEED_DATA } from '../data/seed';
 import { hashPassword, verifyPassword } from '../lib/auth';
 
-const STORAGE_KEY = 'rswater.data.v1';
+const STORAGE_KEY = 'rswater.data.v2';
 const SESSION_KEY = 'rswater.admin.session';
 
 function loadData(): AppData {
