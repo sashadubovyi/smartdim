@@ -24,6 +24,9 @@ function loadData(): AppData {
     if (!parsed?.products || !parsed?.content || !parsed?.credentials) {
       return structuredClone(SEED_DATA);
     }
+    // Additive migration: backfill any content fields introduced in newer
+    // versions (e.g. delivery/payment) while keeping the user's own edits.
+    parsed.content = { ...structuredClone(SEED_DATA.content), ...parsed.content };
     return parsed;
   } catch {
     return structuredClone(SEED_DATA);

@@ -26,6 +26,8 @@ export type IconName =
   | 'logout'
   | 'image'
   | 'chevronDown'
+  | 'card'
+  | 'cash'
   | 'sparkle';
 
 const paths: Record<IconName, JSX.Element> = {
@@ -147,6 +149,21 @@ const paths: Record<IconName, JSX.Element> = {
     </>
   ),
   chevronDown: <polyline points="6 9 12 15 18 9" />,
+  card: (
+    <>
+      <rect x="2" y="5" width="20" height="14" rx="3" />
+      <line x1="2" y1="10" x2="22" y2="10" />
+      <line x1="6" y1="15" x2="10" y2="15" />
+    </>
+  ),
+  cash: (
+    <>
+      <rect x="2" y="6" width="20" height="12" rx="2" />
+      <circle cx="12" cy="12" r="3" />
+      <line x1="6" y1="12" x2="6" y2="12" />
+      <line x1="18" y1="12" x2="18" y2="12" />
+    </>
+  ),
   sparkle: <path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z" />,
 };
 

@@ -32,6 +32,14 @@ export interface Contacts {
   viber: string;
 }
 
+/** A generic icon + title (+ optional note) row, used for delivery/payment. */
+export interface InfoItem {
+  id: string;
+  icon: string;
+  title: string;
+  text?: string;
+}
+
 export interface SiteContent {
   siteTitle: string;
   currency: string;
@@ -42,6 +50,11 @@ export interface SiteContent {
   };
   advantagesTitle: string;
   advantages: Advantage[];
+  deliveryPaymentTitle: string;
+  deliveryTitle: string;
+  delivery: InfoItem[];
+  paymentTitle: string;
+  payment: InfoItem[];
   contacts: Contacts;
   footer: {
     about: string;

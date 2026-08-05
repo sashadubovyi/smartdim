@@ -13,6 +13,7 @@ import { ProductDetail } from '../components/ProductDetail';
 import { CartButton } from '../components/CartButton';
 import { CartDrawer } from '../components/CartDrawer';
 import { Advantages } from '../components/Advantages';
+import { DeliveryPayment } from '../components/DeliveryPayment';
 import { Footer } from '../components/Footer';
 import { Icon } from '../components/icons/Icon';
 
@@ -115,6 +116,15 @@ export function Home() {
 
       {/* Advantages */}
       <Advantages title={content.advantagesTitle} advantages={content.advantages} />
+
+      {/* Delivery & payment */}
+      <DeliveryPayment
+        title={content.deliveryPaymentTitle}
+        deliveryTitle={content.deliveryTitle}
+        delivery={content.delivery}
+        paymentTitle={content.paymentTitle}
+        payment={content.payment}
+      />
 
       {/* Footer */}
       <Footer content={content} onOpenContacts={() => openContactsFor()} />

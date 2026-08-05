@@ -48,6 +48,18 @@ export const SEED_DATA: AppData = {
       { id: 'a3', icon: 'truck', title: 'Швидка доставка' },
       { id: 'a4', icon: 'shield', title: 'Гарантія, обмін та повернення' },
     ],
+    deliveryPaymentTitle: 'Доставка та оплата',
+    deliveryTitle: 'Доставка',
+    delivery: [
+      { id: 'd1', icon: 'truck', title: 'Нова Пошта', text: 'Доставка по всій Україні' },
+      { id: 'd2', icon: 'box', title: 'Укрпошта', text: 'Доставка по всій Україні' },
+      { id: 'd3', icon: 'truck', title: "Кур'єр по Києву", text: 'Доставка таксі' },
+    ],
+    paymentTitle: 'Оплата',
+    payment: [
+      { id: 'pay1', icon: 'cash', title: 'Післяплата', text: 'Готівкою при отриманні' },
+      { id: 'pay2', icon: 'card', title: 'На карту або Р/С', text: 'ПриватБанк' },
+    ],
     contacts: {
       phone: '+380000000000',
       telegram: 'rswater',
