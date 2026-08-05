@@ -1,10 +1,10 @@
-# rs-water — помпа для води 💧
+# water-rs — помпа для води 💧
 
 Легкий, швидкий, **mobile-first** інтернет-магазин помп для води з кошиком та повноцінною **адмін-панеллю**. Побудований так, щоб миттєво деплоїтись на **Firebase Hosting** і легко передаватись клієнту під ребрендинг/перепродаж.
 
 > Storefront + кошик + admin panel, готові до деплою. Дані зберігаються локально в браузері — жодного бекенду для старту не потрібно.
 >
-> ℹ️ Бренд — **rs-water** (світла синьо-блакитна тема). Наразі сайт деплоїться у Firebase-проєкт `smart-dim`; після створення проєкту `rs-water` достатньо змінити `projectId` у workflow та `.firebaserc`.
+> ℹ️ Бренд — **water-rs** (світла синьо-блакитна тема). Сайт задеплоєний у Firebase-проєкт `water-rs` → **https://water-rs.web.app**.
 
 ---
 
@@ -82,22 +82,22 @@ firebase login
 ### 2. Створити проєкт Firebase
 
 1. Відкрийте [Firebase Console](https://console.firebase.google.com/) → **Add project**.
-2. Придумайте ID проєкту (наприклад, `smartdim`). Це визначає домен `https://<project-id>.web.app`.
+2. Придумайте ID проєкту (наприклад, `water-rs`). Це визначає домен `https://<project-id>.web.app`.
 3. У консолі: **Build → Hosting → Get started** (Firebase Hosting активується автоматично при першому деплої).
 
 ### 3. Прив’язати цей код до вашого проєкту
 
-Файл [`.firebaserc`](./.firebaserc) вже налаштований на проєкт **`smart-dim`**:
+Файл [`.firebaserc`](./.firebaserc) вже налаштований на проєкт **`water-rs`**:
 
 ```json
 {
   "projects": {
-    "default": "smart-dim"
+    "default": "water-rs"
   }
 }
 ```
 
-> Якщо ваш реальний Project ID інший (Firebase іноді додає суфікс, напр. `smart-dim-a1b2c`) — замініть значення `default` на точний ID з **Firebase Console → ⚙️ Project settings → Project ID**. Або виконайте `firebase use --add` і виберіть проєкт зі списку — CLI сам оновить `.firebaserc`.
+> Якщо ваш реальний Project ID інший (Firebase іноді додає суфікс, напр. `water-rs-a1b2c`) — замініть значення `default` на точний ID з **Firebase Console → ⚙️ Project settings → Project ID**. Або виконайте `firebase use --add` і виберіть проєкт зі списку — CLI сам оновить `.firebaserc`.
 
 ### 4. Зібрати та задеплоїти
 
@@ -119,7 +119,7 @@ firebase deploy --only hosting
 https://<project-id>.web.app
 ```
 
-Для нашого проєкту — `https://smart-dim.web.app`.
+Для нашого проєкту — `https://water-rs.web.app`.
 
 Конфігурація хостингу вже налаштована в [`firebase.json`](./firebase.json):
 - `public: "dist"` — деплоїться зібрана папка.
@@ -138,9 +138,9 @@ https://<project-id>.web.app
 2. **Додати ключ у GitHub:** репозиторій на GitHub → **Settings → Secrets and variables → Actions → New repository secret**:
    - **Name:** `FIREBASE_SERVICE_ACCOUNT`
    - **Secret:** відкрийте завантажений `.json` у будь-якому текстовому редакторі, скопіюйте **весь** вміст і вставте сюди.
-3. Готово. Тепер будь-яка зміна в `main` (навіть редагування через сайт GitHub) автоматично оновлює `https://smart-dim.web.app`. Прогрес видно у вкладці **Actions**.
+3. Готово. Тепер будь-яка зміна в `main` (навіть редагування через сайт GitHub) автоматично оновлює `https://water-rs.web.app`. Прогрес видно у вкладці **Actions**.
 
-> Якщо ваш Project ID відрізняється від `smart-dim`, змініть значення `projectId:` у файлі workflow.
+> Якщо ваш Project ID відрізняється від `water-rs`, змініть значення `projectId:` у файлі workflow.
 
 ---
 

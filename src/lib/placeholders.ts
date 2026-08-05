@@ -30,13 +30,13 @@ const glyphs = {
 };
 
 export const PLACEHOLDERS = {
-  bulb: svg('#dbeaf7', '#2686d4', glyphs.bulb, 'rs-water'),
-  bulb2: svg('#e0eefb', '#4a9fe2', glyphs.bulb, 'rs-water'),
-  plug: svg('#dde8f6', '#2686d4', glyphs.plug, 'rs-water'),
-  camera: svg('#d9e6f5', '#1f6fbb', glyphs.camera, 'rs-water'),
-  speaker: svg('#e0ebf8', '#4a9fe2', glyphs.speaker, 'rs-water'),
-  thermostat: svg('#dce8f6', '#2686d4', glyphs.thermostat, 'rs-water'),
-  lock: svg('#dbe7f5', '#1f6fbb', glyphs.lock, 'rs-water'),
+  bulb: svg('#dbeaf7', '#2686d4', glyphs.bulb, 'water-rs'),
+  bulb2: svg('#e0eefb', '#4a9fe2', glyphs.bulb, 'water-rs'),
+  plug: svg('#dde8f6', '#2686d4', glyphs.plug, 'water-rs'),
+  camera: svg('#d9e6f5', '#1f6fbb', glyphs.camera, 'water-rs'),
+  speaker: svg('#e0ebf8', '#4a9fe2', glyphs.speaker, 'water-rs'),
+  thermostat: svg('#dce8f6', '#2686d4', glyphs.thermostat, 'water-rs'),
+  lock: svg('#dbe7f5', '#1f6fbb', glyphs.lock, 'water-rs'),
 };
 
-export const EMPTY_IMAGE = svg('#eef7fd', '#cbe6fc', glyphs.bulb, 'rs-water');
+export const EMPTY_IMAGE = svg('#eef7fd', '#cbe6fc', glyphs.bulb, 'water-rs');
