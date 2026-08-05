@@ -7,21 +7,29 @@ interface ProductCardProps {
   product: Product;
   currency: string;
   onOpen: (product: Product) => void;
+  onAdd: (product: Product) => void;
   index?: number;
 }
 
-export function ProductCard({ product, currency, onOpen, index = 0 }: ProductCardProps) {
+export function ProductCard({ product, currency, onOpen, onAdd, index = 0 }: ProductCardProps) {
   const image = product.images[0];
 
   return (
-    <motion.button
-      type="button"
+    <motion.div
+      role="button"
+      tabIndex={0}
       onClick={() => onOpen(product)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onOpen(product);
+        }
+      }}
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.3), ease: [0.22, 1, 0.36, 1] }}
-      whileTap={{ scale: 0.97 }}
-      className="group relative flex select-none flex-col overflow-hidden rounded-4xl bg-white p-3 text-left shadow-soft transition-shadow hover:shadow-card"
+      whileTap={{ scale: 0.98 }}
+      className="group relative flex cursor-pointer select-none flex-col overflow-hidden rounded-4xl bg-white p-3 text-left shadow-soft ring-1 ring-mint-100 transition-shadow hover:shadow-card"
     >
       <div className="relative aspect-[4/5] overflow-hidden rounded-[1.6rem] bg-mint-50">
         <motion.img
@@ -36,9 +44,17 @@ export function ProductCard({ product, currency, onOpen, index = 0 }: ProductCar
             -{Math.round((1 - product.price / product.oldPrice) * 100)}%
           </span>
         )}
-        <span className="absolute bottom-3 right-3 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-brand-700 shadow-soft backdrop-blur transition group-hover:bg-brand group-hover:text-white">
-          <Icon name="plus" size={18} />
-        </span>
+        <button
+          type="button"
+          aria-label="Додати в кошик"
+          onClick={(e) => {
+            e.stopPropagation();
+            onAdd(product);
+          }}
+          className="absolute bottom-3 right-3 grid h-11 w-11 place-items-center rounded-full bg-white/90 text-brand-700 shadow-soft ring-1 ring-mint-100 backdrop-blur transition hover:bg-brand hover:text-white active:scale-90"
+        >
+          <Icon name="plus" size={20} />
+        </button>
       </div>
 
       <div className="flex flex-1 flex-col px-1.5 pb-1 pt-3">
@@ -61,6 +77,6 @@ export function ProductCard({ product, currency, onOpen, index = 0 }: ProductCar
           )}
         </div>
       </div>
-    </motion.button>
+    </motion.div>
   );
 }

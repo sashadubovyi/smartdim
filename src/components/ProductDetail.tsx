@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { Product } from '../types';
 import { formatPrice } from '../lib/format';
 import { ImageGallery } from './ImageGallery';
@@ -9,10 +9,17 @@ interface ProductDetailProps {
   product: Product | null;
   currency: string;
   onClose: () => void;
-  onBuy: (product: Product) => void;
+  onAdd: (product: Product) => void;
 }
 
-export function ProductDetail({ product, currency, onClose, onBuy }: ProductDetailProps) {
+export function ProductDetail({ product, currency, onClose, onAdd }: ProductDetailProps) {
+  const [added, setAdded] = useState(false);
+
+  // Reset the "added" confirmation whenever a different product is opened.
+  useEffect(() => {
+    setAdded(false);
+  }, [product]);
+
   // Lock body scroll while the sheet is open.
   useEffect(() => {
     if (product) {
@@ -102,17 +109,31 @@ export function ProductDetail({ product, currency, onClose, onBuy }: ProductDeta
               </div>
             </div>
 
-            {/* Floating Buy button */}
+            {/* Floating add-to-cart button */}
             <div className="pointer-events-none fixed inset-x-0 bottom-0 z-20 mx-auto flex max-w-lg justify-center px-5 pb-6">
               <motion.button
                 type="button"
-                onClick={() => onBuy(product)}
+                onClick={() => {
+                  onAdd(product);
+                  setAdded(true);
+                  window.setTimeout(() => setAdded(false), 1600);
+                }}
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.15, type: 'spring', stiffness: 300, damping: 26 }}
-                className="pointer-events-auto btn-primary w-full py-4 text-base shadow-float"
+                className={`pointer-events-auto w-full py-4 text-base shadow-float transition-colors ${
+                  added ? 'btn bg-brand-700 text-white' : 'btn-primary'
+                }`}
               >
-                <Icon name="bag" size={20} /> Купити • {formatPrice(product.price, currency)}
+                {added ? (
+                  <>
+                    <Icon name="check" size={20} /> Додано в кошик
+                  </>
+                ) : (
+                  <>
+                    <Icon name="bag" size={20} /> Додати в кошик • {formatPrice(product.price, currency)}
+                  </>
+                )}
               </motion.button>
             </div>
           </motion.div>

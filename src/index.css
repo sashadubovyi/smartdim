@@ -22,11 +22,9 @@
   }
 
   body {
-    @apply bg-mint-100 text-ink font-sans antialiased;
-    /* Soft, layered mint background echoing the reference art direction. */
-    background-image:
-      radial-gradient(120% 60% at 100% 0%, rgba(58, 97, 84, 0.1) 0%, rgba(58, 97, 84, 0) 55%),
-      radial-gradient(90% 50% at 0% 100%, rgba(155, 184, 150, 0.28) 0%, rgba(155, 184, 150, 0) 60%);
+    @apply bg-white text-ink font-sans antialiased;
+    /* Clean white background with a whisper of green in the top corner. */
+    background-image: radial-gradient(90% 40% at 100% 0%, rgba(58, 97, 84, 0.05) 0%, rgba(58, 97, 84, 0) 60%);
     background-attachment: fixed;
     min-height: 100dvh;
   }
@@ -42,7 +40,7 @@
   }
 
   .surface {
-    @apply rounded-4xl bg-white shadow-soft;
+    @apply rounded-4xl bg-white shadow-soft ring-1 ring-mint-100;
   }
 
   .chip {

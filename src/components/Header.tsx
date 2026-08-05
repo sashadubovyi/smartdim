@@ -16,7 +16,7 @@ export function Header({ title, onOpenMenu }: HeaderProps) {
         type="button"
         onClick={onOpenMenu}
         aria-label="Відкрити меню"
-        className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-brand-700 shadow-soft transition active:scale-95"
+        className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-brand-700 shadow-soft ring-1 ring-mint-100 transition active:scale-95"
       >
         <Icon name="menu" size={22} />
       </button>

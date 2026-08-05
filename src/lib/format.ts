@@ -5,9 +5,18 @@ export function formatPrice(value: number, currency = '₴'): string {
   return `${formatted} ${currency}`;
 }
 
-/** Build a tel:/https: link from a raw phone or handle for each channel. */
-export function contactHref(kind: 'phone' | 'telegram' | 'whatsapp' | 'viber', value: string): string {
+/**
+ * Build a tel:/https: link from a raw phone or handle for each channel.
+ * An optional `message` prefills the text where the channel supports it
+ * (WhatsApp and Viber); Telegram/phone open the chat/dialer directly.
+ */
+export function contactHref(
+  kind: 'phone' | 'telegram' | 'whatsapp' | 'viber',
+  value: string,
+  message?: string,
+): string {
   const digits = value.replace(/[^\d+]/g, '');
+  const text = message ? encodeURIComponent(message) : '';
   switch (kind) {
     case 'phone':
       return `tel:${digits}`;
@@ -16,8 +25,8 @@ export function contactHref(kind: 'phone' | 'telegram' | 'whatsapp' | 'viber', v
       return `https://t.me/${handle}`;
     }
     case 'whatsapp':
-      return `https://wa.me/${digits.replace(/^\+/, '')}`;
+      return `https://wa.me/${digits.replace(/^\+/, '')}${text ? `?text=${text}` : ''}`;
     case 'viber':
-      return `viber://chat?number=${encodeURIComponent(digits)}`;
+      return `viber://chat?number=${encodeURIComponent(digits)}${text ? `&text=${text}` : ''}`;
   }
 }

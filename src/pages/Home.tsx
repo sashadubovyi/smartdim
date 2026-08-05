@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '../store/store';
+import { useCart } from '../store/cart';
 import type { Product } from '../types';
 import { Header } from '../components/Header';
 import { MenuDrawer } from '../components/MenuDrawer';
@@ -9,17 +10,23 @@ import { CategoryTabs } from '../components/CategoryTabs';
 import { FeaturedSlider } from '../components/FeaturedSlider';
 import { ProductCard } from '../components/ProductCard';
 import { ProductDetail } from '../components/ProductDetail';
+import { CartButton } from '../components/CartButton';
+import { CartDrawer } from '../components/CartDrawer';
 import { Advantages } from '../components/Advantages';
 import { Footer } from '../components/Footer';
 import { Icon } from '../components/icons/Icon';
 
 export function Home() {
   const { content, products, categories } = useStore();
+  const { add } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [contactsOpen, setContactsOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('all');
   const [selected, setSelected] = useState<Product | null>(null);
   const [orderProduct, setOrderProduct] = useState<Product | null>(null);
+  const [orderText, setOrderText] = useState<string>('');
+  const [toast, setToast] = useState('');
 
   const featured = useMemo(() => products.filter((p) => p.featured), [products]);
 
@@ -28,8 +35,22 @@ export function Home() {
     [products, activeCategory],
   );
 
+  function addToCart(product: Product) {
+    add(product.id);
+    setToast(`«${product.title}» у кошику`);
+    window.setTimeout(() => setToast(''), 1800);
+  }
+
   function openContactsFor(product?: Product) {
     setOrderProduct(product ?? null);
+    setOrderText('');
+    setContactsOpen(true);
+  }
+
+  function handleCheckout(text: string) {
+    setCartOpen(false);
+    setOrderText(text);
+    setOrderProduct(null);
     setContactsOpen(true);
   }
 
@@ -68,13 +89,14 @@ export function Home() {
               product={product}
               currency={content.currency}
               onOpen={setSelected}
+              onAdd={addToCart}
               index={i}
             />
           ))}
         </div>
 
         {filtered.length === 0 && (
-          <div className="rounded-4xl bg-white p-10 text-center text-ink-soft shadow-soft">
+          <div className="rounded-4xl bg-white p-10 text-center text-ink-soft shadow-soft ring-1 ring-mint-100">
             У цій категорії поки немає товарів.
           </div>
         )}
@@ -86,21 +108,24 @@ export function Home() {
       {/* Footer */}
       <Footer content={content} onOpenContacts={() => openContactsFor()} />
 
-      {/* Floating global contact button */}
+      {/* Floating cart button */}
       <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto flex max-w-[460px] justify-end px-5 pb-6 sm:max-w-[520px]">
-        <motion.button
-          type="button"
-          onClick={() => openContactsFor()}
-          aria-label="Зв’язатися"
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.4 }}
-          whileTap={{ scale: 0.92 }}
-          className="pointer-events-auto grid h-16 w-16 place-items-center rounded-full bg-brand text-white shadow-float"
-        >
-          <Icon name="phone" size={24} />
-        </motion.button>
+        <CartButton onClick={() => setCartOpen(true)} />
       </div>
+
+      {/* Added-to-cart toast */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed inset-x-0 bottom-28 z-40 mx-auto flex w-fit max-w-[90%] items-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-semibold text-white shadow-float"
+          >
+            <Icon name="check" size={18} /> {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Overlays */}
       <MenuDrawer
@@ -115,12 +140,14 @@ export function Home() {
         product={selected}
         currency={content.currency}
         onClose={() => setSelected(null)}
-        onBuy={(p) => openContactsFor(p)}
+        onAdd={addToCart}
       />
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} onCheckout={handleCheckout} />
       <ContactsModal
         open={contactsOpen}
         contacts={content.contacts}
         productTitle={orderProduct?.title}
+        orderText={orderText || undefined}
         onClose={() => setContactsOpen(false)}
       />
     </div>
