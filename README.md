@@ -125,6 +125,22 @@ https://<project-id>.web.app
 
 ---
 
+## 🤖 Автоматичний деплой через GitHub Actions
+
+У репозиторії є готовий workflow [`.github/workflows/firebase-deploy.yml`](./.github/workflows/firebase-deploy.yml): при кожному пуші в гілку `main` сайт **автоматично** збирається і публікується на Firebase Hosting — вручну деплоїти не треба.
+
+**Одноразове налаштування (лише кліки у браузері):**
+
+1. **Ключ сервісного акаунта Firebase:** [Firebase Console](https://console.firebase.google.com/) → ваш проєкт → ⚙️ **Project settings → Service accounts → Generate new private key** → завантажиться файл `.json`.
+2. **Додати ключ у GitHub:** репозиторій на GitHub → **Settings → Secrets and variables → Actions → New repository secret**:
+   - **Name:** `FIREBASE_SERVICE_ACCOUNT`
+   - **Secret:** відкрийте завантажений `.json` у будь-якому текстовому редакторі, скопіюйте **весь** вміст і вставте сюди.
+3. Готово. Тепер будь-яка зміна в `main` (навіть редагування через сайт GitHub) автоматично оновлює `https://smart-dim.web.app`. Прогрес видно у вкладці **Actions**.
+
+> Якщо ваш Project ID відрізняється від `smart-dim`, змініть значення `projectId:` у файлі workflow.
+
+---
+
 ## 🔁 Передача клієнту / перепродаж (re-branding & re-bind)
 
 Цей репозиторій зроблено як **готовий шаблон під перепродаж**. Щоб віддати сайт новому власнику під його бренд і домен:
