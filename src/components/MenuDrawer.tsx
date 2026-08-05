@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { AnimatePresence, motion, type Variants } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { Icon } from './icons/Icon';
 
 interface MenuDrawerProps {
@@ -108,7 +107,7 @@ export function MenuDrawer({
               })}
             </nav>
 
-            <div className="space-y-3 border-t border-mint-100 px-7 py-7">
+            <div className="border-t border-mint-100 px-7 py-7">
               <button
                 type="button"
                 onClick={() => {
@@ -119,9 +118,6 @@ export function MenuDrawer({
               >
                 <Icon name="phone" size={18} /> Зв’язатися
               </button>
-              <Link to="/admin" onClick={onClose} className="btn-ghost w-full">
-                <Icon name="settings" size={18} /> Адмін-панель
-              </Link>
             </div>
           </motion.aside>
         </motion.div>
