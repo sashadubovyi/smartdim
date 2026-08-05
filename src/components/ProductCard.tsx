@@ -16,14 +16,12 @@ export function ProductCard({ product, currency, onOpen, index = 0 }: ProductCar
   return (
     <motion.button
       type="button"
-      layout
       onClick={() => onOpen(product)}
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8, scale: 0.98 }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.3), ease: [0.22, 1, 0.36, 1] }}
       whileTap={{ scale: 0.97 }}
-      className="group relative flex flex-col overflow-hidden rounded-4xl bg-white p-3 text-left shadow-soft transition-shadow hover:shadow-card"
+      className="group relative flex select-none flex-col overflow-hidden rounded-4xl bg-white p-3 text-left shadow-soft transition-shadow hover:shadow-card"
     >
       <div className="relative aspect-[4/5] overflow-hidden rounded-[1.6rem] bg-mint-50">
         <motion.img

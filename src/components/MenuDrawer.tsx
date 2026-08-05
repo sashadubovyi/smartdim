@@ -91,7 +91,8 @@ export function MenuDrawer({
                     {isActive && (
                       <motion.span
                         layoutId="menu-active"
-                        className="absolute inset-y-1 -left-4 -right-4 -z-10 rounded-full bg-mint-100"
+                        className="absolute inset-y-1 -left-4 -right-4 -z-10 bg-mint-100"
+                        style={{ borderRadius: 999 }}
                         transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                       />
                     )}

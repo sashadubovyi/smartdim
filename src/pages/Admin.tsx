@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useStore } from '../store/store';
 import { AdminLogin } from '../admin/AdminLogin';
@@ -42,28 +42,30 @@ export function Admin() {
         </div>
 
         {/* Tabs — desktop / tablet */}
-        <div className="no-scrollbar mx-auto hidden max-w-3xl gap-1 overflow-x-auto px-5 pb-2 sm:flex">
+        <motion.div
+          layoutScroll
+          className="no-scrollbar mx-auto hidden max-w-3xl gap-1 overflow-x-auto px-5 pb-2 sm:flex"
+        >
           {tabs.map((t) => (
             <TabButton key={t.id} tab={t} active={tab === t.id} onClick={() => setTab(t.id)} />
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <main className="mx-auto max-w-3xl px-5 py-6">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={tab}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25 }}
-          >
-            {tab === 'products' && <ProductsManager />}
-            {tab === 'content' && <ContentManager />}
-            {tab === 'contacts' && <ContactsManager />}
-            {tab === 'settings' && <SettingsManager />}
-          </motion.div>
-        </AnimatePresence>
+        {/* Keyed opacity fade — swaps content instantly (no height collapse),
+            so switching tabs no longer makes the page jump. */}
+        <motion.div
+          key={tab}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+        >
+          {tab === 'products' && <ProductsManager />}
+          {tab === 'content' && <ContentManager />}
+          {tab === 'contacts' && <ContactsManager />}
+          {tab === 'settings' && <SettingsManager />}
+        </motion.div>
       </main>
 
       {/* Bottom tab bar — mobile */}
@@ -110,12 +112,17 @@ function TabButton({
     <button
       type="button"
       onClick={onClick}
-      className={`relative flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition ${
+      className={`relative flex select-none items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
         active ? 'text-white' : 'text-ink-soft hover:text-brand-700'
       }`}
     >
       {active && (
-        <motion.span layoutId="admin-tab" className="absolute inset-0 -z-10 rounded-full bg-brand" />
+        <motion.span
+          layoutId="admin-tab"
+          className="absolute inset-0 -z-10 bg-brand"
+          style={{ borderRadius: 999 }}
+          transition={{ type: 'spring', stiffness: 500, damping: 40 }}
+        />
       )}
       <Icon name={tab.icon} size={16} /> {tab.label}
     </button>

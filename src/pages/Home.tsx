@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useStore } from '../store/store';
 import type { Product } from '../types';
 import { Header } from '../components/Header';
@@ -58,21 +58,20 @@ export function Home() {
         <CategoryTabs categories={categories} active={activeCategory} onChange={setActiveCategory} />
       </section>
 
-      {/* Product grid */}
+      {/* Product grid — keyed by category so the entrance stagger replays
+          without shared-layout reflow (which caused the cards to jump). */}
       <section className="mt-4">
-        <motion.div layout className="grid grid-cols-2 gap-4">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((product, i) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                currency={content.currency}
-                onOpen={setSelected}
-                index={i}
-              />
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <div key={activeCategory} className="grid grid-cols-2 gap-4">
+          {filtered.map((product, i) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              currency={content.currency}
+              onOpen={setSelected}
+              index={i}
+            />
+          ))}
+        </div>
 
         {filtered.length === 0 && (
           <div className="rounded-4xl bg-white p-10 text-center text-ink-soft shadow-soft">

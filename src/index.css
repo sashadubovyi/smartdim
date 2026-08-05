@@ -11,6 +11,16 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  /* Prevent the blue text-selection flash when tapping interactive elements
+     (inputs & textareas stay selectable). */
+  button,
+  a,
+  [role='button'],
+  label {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
   body {
     @apply bg-mint-100 text-ink font-sans antialiased;
     /* Soft, layered mint background echoing the reference art direction. */
