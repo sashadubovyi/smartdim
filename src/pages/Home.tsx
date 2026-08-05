@@ -74,15 +74,26 @@ export function Home() {
         </section>
       )}
 
-      {/* Category filter */}
-      <section className="mt-6">
-        <CategoryTabs categories={categories} active={activeCategory} onChange={setActiveCategory} />
-      </section>
+      {/* Category filter — only meaningful with more than one category. */}
+      {categories.length > 1 && (
+        <section className="mt-6">
+          <CategoryTabs categories={categories} active={activeCategory} onChange={setActiveCategory} />
+        </section>
+      )}
 
       {/* Product grid — keyed by category so the entrance stagger replays
-          without shared-layout reflow (which caused the cards to jump). */}
-      <section className="mt-4">
-        <div key={activeCategory} className="grid grid-cols-2 gap-4">
+          without shared-layout reflow (which caused the cards to jump).
+          A single product is shown as one centered card instead of a lonely
+          half-width cell. */}
+      <section className="mt-6">
+        <div
+          key={activeCategory}
+          className={
+            filtered.length === 1
+              ? 'mx-auto max-w-[320px]'
+              : 'grid grid-cols-2 gap-4'
+          }
+        >
           {filtered.map((product, i) => (
             <ProductCard
               key={product.id}

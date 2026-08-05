@@ -23,8 +23,10 @@
 
   body {
     @apply bg-white text-ink font-sans antialiased;
-    /* Clean white background with a whisper of green in the top corner. */
-    background-image: radial-gradient(90% 40% at 100% 0%, rgba(58, 97, 84, 0.05) 0%, rgba(58, 97, 84, 0) 60%);
+    /* Clean white background with a whisper of blue, like light on water. */
+    background-image:
+      radial-gradient(90% 40% at 100% 0%, rgba(38, 134, 212, 0.07) 0%, rgba(38, 134, 212, 0) 60%),
+      radial-gradient(80% 40% at 0% 100%, rgba(124, 189, 238, 0.12) 0%, rgba(124, 189, 238, 0) 60%);
     background-attachment: fixed;
     min-height: 100dvh;
   }

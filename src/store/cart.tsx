@@ -13,7 +13,7 @@ export interface CartItem {
   qty: number;
 }
 
-const CART_KEY = 'smartdim.cart.v1';
+const CART_KEY = 'rswater.cart.v1';
 
 function loadCart(): CartItem[] {
   if (typeof localStorage === 'undefined') return [];

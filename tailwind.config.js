@@ -4,36 +4,36 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Deep sage-teal accent from the design reference.
+        // Fresh water-blue accent palette.
         brand: {
-          50: '#eef4f1',
-          100: '#d6e4dd',
-          200: '#aecabd',
-          300: '#82ab9a',
-          400: '#5c8a77',
-          500: '#457566',
-          600: '#3a6154',
-          700: '#2f4d44',
-          800: '#273f38',
-          900: '#1f322d',
-          DEFAULT: '#3a6154',
+          50: '#eef7fd',
+          100: '#d5ebfb',
+          200: '#aed7f6',
+          300: '#7cbdee',
+          400: '#4a9fe2',
+          500: '#2686d4',
+          600: '#1f6fbb',
+          700: '#1b5a97',
+          800: '#184a7c',
+          900: '#163f68',
+          DEFAULT: '#2686d4',
         },
-        // Light mint page background + soft sage decorations.
+        // Very light blue page tints + soft blue decorations.
         mint: {
-          50: '#f4faf1',
-          100: '#e7f4e2',
-          200: '#cfe9c6',
-          300: '#b6dca9',
+          50: '#f2f9ff',
+          100: '#e6f3ff',
+          200: '#cbe6fc',
+          300: '#a9d5f7',
         },
         sage: {
-          200: '#cddccb',
-          300: '#b3c9af',
-          400: '#9bb896',
+          200: '#cddffb',
+          300: '#aeccf3',
+          400: '#8fb6e6',
         },
         ink: {
-          DEFAULT: '#1f2a26',
-          soft: '#4a5a53',
-          muted: '#98a69f',
+          DEFAULT: '#182a3e',
+          soft: '#48586b',
+          muted: '#8fa0b3',
         },
       },
       fontFamily: {
@@ -44,9 +44,9 @@ export default {
         '5xl': '2.75rem',
       },
       boxShadow: {
-        soft: '0 18px 40px -24px rgba(31, 50, 45, 0.35)',
-        card: '0 24px 60px -30px rgba(31, 50, 45, 0.45)',
-        float: '0 12px 30px -8px rgba(47, 77, 68, 0.55)',
+        soft: '0 18px 40px -24px rgba(24, 42, 62, 0.32)',
+        card: '0 24px 60px -30px rgba(24, 42, 62, 0.42)',
+        float: '0 12px 30px -8px rgba(31, 111, 187, 0.5)',
       },
       keyframes: {
         'fade-up': {

@@ -1,124 +1,44 @@
 import type { AppData } from '../types';
 import { hashPassword } from '../lib/auth';
-import { PLACEHOLDERS } from '../lib/placeholders';
 
 const now = Date.now();
 
-// Initial mock catalogue with placeholder imagery so the storefront and the
-// admin panel look complete the moment the app is opened.
+// Product photos live in /public/products and are served as static assets.
+const PUMP_IMAGES = ['/products/pump-1.png', '/products/pump-2.jpg', '/products/pump-3.jpg'];
+
+// Initial catalogue: a single water-pump product for the rs-water store.
 export const SEED_DATA: AppData = {
-  version: 1,
+  version: 2,
   products: [
     {
-      id: 'p-bulb',
-      title: 'Розумна лампа smartdim Aura',
-      tagline: 'Освітлення',
-      category: 'Освітлення',
+      id: 'p-pump',
+      title: 'Помпа для води Redsack (Type-C)',
+      tagline: 'Помпа для води',
+      category: 'Помпи для води',
       description:
-        'RGBW лампа з керуванням через застосунок та голосом. 16 млн кольорів, сценарії, розклад та плавне пробудження. Працює з Wi-Fi без хабів.',
-      price: 549,
-      oldPrice: 690,
-      images: [PLACEHOLDERS.bulb, PLACEHOLDERS.bulb2],
+        'Автоматична електрична помпа для бутильованої води із заряджанням від USB Type-C. Потужний потік наповнює склянку 300 мл лише за 5 секунд — одне натискання, і чиста вода вже у склянці.\n\nОдного повного заряду вистачає приблизно на 15 бутлів (19 л / 5 галонів). Компактний білий корпус із нержавіючим носиком підходить для стандартних бутлів 11–19 л. Ідеальне рішення для дому та офісу.',
+      price: 399,
+      oldPrice: 549,
+      images: PUMP_IMAGES,
       specs: [
-        { label: 'Тип', value: 'RGBW E27' },
-        { label: 'Яскравість', value: '900 лм' },
-        { label: "З'єднання", value: 'Wi-Fi 2.4 ГГц' },
+        { label: 'Заряджання', value: 'USB Type-C' },
+        { label: 'Один заряд', value: '≈15 бутлів (19 л)' },
+        { label: 'Швидкість', value: '300 мл за 5 сек' },
+        { label: 'Сумісність', value: 'Бутлі 11–19 л' },
+        { label: 'Матеріал', value: 'Пластик + нерж. сталь' },
+        { label: 'Колір', value: 'Білий' },
       ],
-      featured: true,
-      createdAt: now - 6000,
-    },
-    {
-      id: 'p-plug',
-      title: 'Розумна розетка smartdim Plug',
-      tagline: 'Енергія',
-      category: 'Розетки',
-      description:
-        'Керуйте будь-яким приладом дистанційно, стежте за споживанням електроенергії та вмикайте техніку за розкладом. Захист від перевантаження.',
-      price: 389,
-      images: [PLACEHOLDERS.plug],
-      specs: [
-        { label: 'Навантаження', value: '16 А / 3680 Вт' },
-        { label: 'Облік', value: 'кВт·год' },
-        { label: "З'єднання", value: 'Wi-Fi' },
-      ],
-      featured: true,
-      createdAt: now - 5000,
-    },
-    {
-      id: 'p-camera',
-      title: 'Wi-Fi камера smartdim View 2K',
-      tagline: 'Безпека',
-      category: 'Безпека',
-      description:
-        'Домашня камера 2K з нічним баченням, детекцією руху та двостороннім аудіо. Сповіщення на телефон і запис на карту пам’яті до 256 ГБ.',
-      price: 1290,
-      oldPrice: 1490,
-      images: [PLACEHOLDERS.camera],
-      specs: [
-        { label: 'Роздільна здатність', value: '2K (2304×1296)' },
-        { label: 'Нічний режим', value: 'ІЧ до 10 м' },
-        { label: 'Кут огляду', value: '110°' },
-      ],
-      featured: true,
-      createdAt: now - 4000,
-    },
-    {
-      id: 'p-speaker',
-      title: 'Розумна колонка smartdim Voice',
-      tagline: 'Аудіо',
-      category: 'Аудіо',
-      description:
-        'Голосовий асистент та кімнатний звук 360°. Керуйте сценаріями розумного дому голосом, слухайте музику та ставте нагадування.',
-      price: 1590,
-      images: [PLACEHOLDERS.speaker],
-      specs: [
-        { label: 'Потужність', value: '20 Вт' },
-        { label: 'Мікрофони', value: '4 далекого поля' },
-        { label: "З'єднання", value: 'Wi-Fi + BT 5.0' },
-      ],
-      createdAt: now - 3000,
-    },
-    {
-      id: 'p-thermostat',
-      title: 'Термостат smartdim Climate',
-      tagline: 'Клімат',
-      category: 'Клімат',
-      description:
-        'Керуйте опаленням зі смартфона, економте до 30% на рахунках. Тижневий розклад, геолокація та звіти про споживання.',
-      price: 2190,
-      images: [PLACEHOLDERS.thermostat],
-      specs: [
-        { label: 'Сумісність', value: 'Котли/тепла підлога' },
-        { label: 'Датчик', value: 'Температура + вологість' },
-        { label: "З'єднання", value: 'Wi-Fi' },
-      ],
-      createdAt: now - 2000,
-    },
-    {
-      id: 'p-lock',
-      title: 'Розумний замок smartdim Lock',
-      tagline: 'Доступ',
-      category: 'Безпека',
-      description:
-        'Відкривайте двері відбитком пальця, кодом, карткою або зі смартфона. Журнал доступу та тимчасові ключі для гостей.',
-      price: 3490,
-      oldPrice: 3990,
-      images: [PLACEHOLDERS.lock],
-      specs: [
-        { label: 'Розблокування', value: '5 способів' },
-        { label: 'Акумулятор', value: 'до 8 місяців' },
-        { label: 'Захист', value: 'IP54' },
-      ],
-      createdAt: now - 1000,
+      featured: false,
+      createdAt: now,
     },
   ],
   content: {
-    siteTitle: 'smartdim',
+    siteTitle: 'rs-water',
     currency: '₴',
     hero: {
-      eyebrow: 'Розумний дім',
-      title: 'Розумні пристрої для вашого дому',
-      subtitle: 'Прямий імпорт • Гарантія • Швидка доставка по Україні',
+      eyebrow: 'Чиста вода',
+      title: 'Помпа для води Redsack',
+      subtitle: 'Заряджання від Type-C • Потужний потік • Швидка доставка по Україні',
     },
     advantagesTitle: 'Наші переваги',
     advantages: [
@@ -129,14 +49,14 @@ export const SEED_DATA: AppData = {
     ],
     contacts: {
       phone: '+380000000000',
-      telegram: 'smartdim',
+      telegram: 'rswater',
       whatsapp: '+380000000000',
       viber: '+380000000000',
     },
     footer: {
       about:
-        'smartdim — це прямий імпортер розумних пристроїв для дому. Понад 10 років ми робимо технології доступними: власний склад, гарантія на кожен товар та швидка доставка по всій Україні.',
-      rights: '© smartdim. Усі права захищені.',
+        'rs-water — надійні помпи для бутильованої води з прямим імпортом. Понад 10 років ми робимо чисту воду доступною: власний склад, гарантія на кожен товар та швидка доставка по всій Україні.',
+      rights: '© rs-water. Усі права захищені.',
     },
   },
   credentials: {
