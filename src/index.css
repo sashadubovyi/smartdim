@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-mint-100 text-ink font-sans antialiased;
+    /* Soft, layered mint background echoing the reference art direction. */
+    background-image:
+      radial-gradient(120% 60% at 100% 0%, rgba(58, 97, 84, 0.1) 0%, rgba(58, 97, 84, 0) 55%),
+      radial-gradient(90% 50% at 0% 100%, rgba(155, 184, 150, 0.28) 0%, rgba(155, 184, 150, 0) 60%);
+    background-attachment: fixed;
+    min-height: 100dvh;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .app-shell {
+    @apply mx-auto w-full max-w-[460px] px-5 pb-32 pt-6 sm:max-w-[520px] md:max-w-3xl lg:max-w-5xl;
+  }
+
+  .surface {
+    @apply rounded-4xl bg-white shadow-soft;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand text-white shadow-float hover:bg-brand-600;
+  }
+
+  .btn-ghost {
+    @apply btn bg-white text-brand-700 ring-1 ring-brand-100 hover:bg-mint-50;
+  }
+
+  .btn-soft {
+    @apply btn bg-mint-100 text-brand-700 hover:bg-mint-200;
+  }
+
+  .field {
+    @apply w-full rounded-2xl border border-mint-200 bg-white px-4 py-3 text-sm text-ink outline-none transition placeholder:text-ink-muted focus:border-brand-300 focus:ring-2 focus:ring-brand-100;
+  }
+
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-ink-soft;
+  }
+}
+
+/* Hide scrollbars on horizontal sliders while keeping scroll behaviour. */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
