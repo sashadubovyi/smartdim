@@ -121,7 +121,7 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
                 className="field"
                 value={form.title}
                 onChange={(e) => set('title', e.target.value)}
-                placeholder="Розумна лампа smartdim Aura"
+                placeholder="Помпа для води Redsack"
               />
             </div>
 
@@ -133,7 +133,7 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
                   list="category-list"
                   value={form.category}
                   onChange={(e) => set('category', e.target.value)}
-                  placeholder="Освітлення"
+                  placeholder="Помпи для бутлів"
                 />
                 <datalist id="category-list">
                   {categories.map((c) => (
@@ -147,7 +147,7 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
                   className="field"
                   value={form.tagline}
                   onChange={(e) => set('tagline', e.target.value)}
-                  placeholder="Освітлення"
+                  placeholder="Redsack"
                 />
               </div>
             </div>
@@ -160,7 +160,7 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
                   inputMode="numeric"
                   value={form.price}
                   onChange={(e) => set('price', e.target.value)}
-                  placeholder="549"
+                  placeholder="1015"
                 />
               </div>
               <div>
@@ -170,7 +170,7 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
                   inputMode="numeric"
                   value={form.oldPrice}
                   onChange={(e) => set('oldPrice', e.target.value)}
-                  placeholder="690"
+                  placeholder="1290"
                 />
               </div>
             </div>
@@ -197,13 +197,13 @@ export function ProductForm({ product, onClose }: ProductFormProps) {
                       className="field"
                       value={spec.label}
                       onChange={(e) => updateSpec(i, { label: e.target.value })}
-                      placeholder="Тип"
+                      placeholder="Бренд"
                     />
                     <input
                       className="field"
                       value={spec.value}
                       onChange={(e) => updateSpec(i, { value: e.target.value })}
-                      placeholder="RGBW E27"
+                      placeholder="Redsack"
                     />
                     <button
                       type="button"

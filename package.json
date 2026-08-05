@@ -1,9 +1,9 @@
 {
-  "name": "smartdim",
+  "name": "water-rs",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "smartdim — light, mobile-first e-commerce storefront with a built-in admin panel.",
+  "description": "water-rs — light, mobile-first e-commerce storefront with a built-in admin panel.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

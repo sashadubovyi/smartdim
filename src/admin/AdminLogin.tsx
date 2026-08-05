@@ -5,7 +5,7 @@ import { useStore } from '../store/store';
 import { Icon } from '../components/icons/Icon';
 
 export function AdminLogin() {
-  const { login } = useStore();
+  const { login, content } = useStore();
   const [loginValue, setLoginValue] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -31,7 +31,7 @@ export function AdminLogin() {
             <Icon name="settings" size={28} />
           </div>
           <h1 className="mt-4 text-2xl font-extrabold text-ink">Адмін-панель</h1>
-          <p className="mt-1 text-sm text-ink-soft">Увійдіть, щоб керувати магазином smartdim</p>
+          <p className="mt-1 text-sm text-ink-soft">Увійдіть, щоб керувати магазином {content.siteTitle}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="surface space-y-4 p-6">
@@ -45,7 +45,7 @@ export function AdminLogin() {
               value={loginValue}
               onChange={(e) => setLoginValue(e.target.value)}
               autoComplete="username"
-              placeholder="admin"
+              placeholder="Ваш логін"
             />
           </div>
           <div>
@@ -59,7 +59,7 @@ export function AdminLogin() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
-              placeholder="••••••"
+              placeholder="Ваш пароль"
             />
           </div>
 
@@ -76,10 +76,6 @@ export function AdminLogin() {
           <button type="submit" className="btn-primary w-full py-3.5">
             Увійти
           </button>
-
-          <p className="text-center text-xs text-ink-muted">
-            Стандартні дані: <span className="font-semibold">admin / admin</span>
-          </p>
         </form>
 
         <Link

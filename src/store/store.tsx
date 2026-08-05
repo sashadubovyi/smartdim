@@ -38,7 +38,7 @@ function persist(data: AppData) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch (err) {
     // Most likely the ~5MB quota was hit by large base64 images.
-    console.error('smartdim: не вдалося зберегти дані (можливо, перевищено ліміт сховища).', err);
+    console.error('Не вдалося зберегти дані (можливо, перевищено ліміт сховища).', err);
     throw new Error(
       'Сховище переповнене. Спробуйте завантажувати менші зображення — вони автоматично стискаються, але дуже великі файли все одно можуть перевищити ліміт браузера.',
     );
@@ -179,7 +179,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const importData = useCallback((json: string) => {
     const parsed = JSON.parse(json) as AppData;
     if (!parsed?.products || !parsed?.content || !parsed?.credentials) {
-      throw new Error('Файл не схожий на резервну копію smartdim.');
+      throw new Error('Файл не схожий на резервну копію магазину.');
     }
     setData(parsed);
   }, []);

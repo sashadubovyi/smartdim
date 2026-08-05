@@ -41,7 +41,8 @@ export function SettingsManager() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `smartdim-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    const slug = data.content.siteTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'store';
+    a.download = `${slug}-backup-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }
