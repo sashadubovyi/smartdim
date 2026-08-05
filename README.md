@@ -84,17 +84,17 @@ firebase login
 
 ### 3. Прив’язати цей код до вашого проєкту
 
-Відредагуйте файл [`.firebaserc`](./.firebaserc) — замініть `smartdim` на ваш реальний Project ID:
+Файл [`.firebaserc`](./.firebaserc) вже налаштований на проєкт **`smart-dim`**:
 
 ```json
 {
   "projects": {
-    "default": "ВАШ-PROJECT-ID"
+    "default": "smart-dim"
   }
 }
 ```
 
-> Альтернативно можна виконати `firebase use --add` і вибрати проєкт зі списку — CLI сам оновить `.firebaserc`.
+> Якщо ваш реальний Project ID інший (Firebase іноді додає суфікс, напр. `smart-dim-a1b2c`) — замініть значення `default` на точний ID з **Firebase Console → ⚙️ Project settings → Project ID**. Або виконайте `firebase use --add` і виберіть проєкт зі списку — CLI сам оновить `.firebaserc`.
 
 ### 4. Зібрати та задеплоїти
 
@@ -116,7 +116,7 @@ firebase deploy --only hosting
 https://<project-id>.web.app
 ```
 
-Наприклад, для стандартного ID — `https://smartdim.web.app`.
+Для нашого проєкту — `https://smart-dim.web.app`.
 
 Конфігурація хостингу вже налаштована в [`firebase.json`](./firebase.json):
 - `public: "dist"` — деплоїться зібрана папка.

@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "smartdim"
+    "default": "smart-dim"
   },
   "targets": {},
   "etags": {}
