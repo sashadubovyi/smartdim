@@ -9,24 +9,15 @@
 
   html {
     -webkit-tap-highlight-color: transparent;
-  }
-
-  /* Prevent the blue text-selection flash when tapping interactive elements
-     (inputs & textareas stay selectable). */
-  button,
-  a,
-  [role='button'],
-  label {
-    -webkit-user-select: none;
-    user-select: none;
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-white text-ink font-sans antialiased;
     /* Clean white background with a whisper of blue, like light on water. */
     background-image:
-      radial-gradient(90% 40% at 100% 0%, rgba(38, 134, 212, 0.07) 0%, rgba(38, 134, 212, 0) 60%),
-      radial-gradient(80% 40% at 0% 100%, rgba(124, 189, 238, 0.12) 0%, rgba(124, 189, 238, 0) 60%);
+      radial-gradient(90% 40% at 100% 0%, rgba(38, 134, 212, 0.06) 0%, rgba(38, 134, 212, 0) 60%),
+      radial-gradient(80% 40% at 0% 100%, rgba(124, 189, 238, 0.1) 0%, rgba(124, 189, 238, 0) 60%);
     background-attachment: fixed;
     min-height: 100dvh;
   }
@@ -34,17 +25,17 @@
   * {
     -webkit-font-smoothing: antialiased;
   }
+
+  button,
+  a,
+  summary,
+  [role='button'] {
+    -webkit-user-select: none;
+    user-select: none;
+  }
 }
 
 @layer components {
-  .app-shell {
-    @apply mx-auto w-full max-w-[460px] px-5 pb-32 pt-6 sm:max-w-[520px] md:max-w-3xl lg:max-w-5xl;
-  }
-
-  .surface {
-    @apply rounded-4xl bg-white shadow-soft ring-1 ring-mint-100;
-  }
-
   .chip {
     @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
   }
@@ -58,7 +49,7 @@
   }
 
   .btn-ghost {
-    @apply btn bg-white text-brand-700 ring-1 ring-brand-100 hover:bg-mint-50;
+    @apply btn bg-white text-brand-700 ring-1 ring-mint-200 hover:bg-mint-50;
   }
 
   .btn-soft {
@@ -68,24 +59,26 @@
   .field {
     @apply w-full rounded-2xl border border-mint-200 bg-white px-4 py-3 text-sm text-ink outline-none transition placeholder:text-ink-muted focus:border-brand-300 focus:ring-2 focus:ring-brand-100;
   }
+}
 
-  .label {
-    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-ink-soft;
+@layer utilities {
+  /* Scroll-reveal initial states — GSAP animates these to visible.
+     Reduced-motion users (and no-JS) see everything immediately. */
+  .reveal,
+  .hero-in {
+    opacity: 0;
+    transform: translateY(28px);
+    will-change: transform, opacity;
   }
-}
 
-/* Hide scrollbars on horizontal sliders while keeping scroll behaviour. */
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .hero-in {
+      opacity: 1;
+      transform: none;
+    }
+    html {
+      scroll-behavior: auto;
+    }
   }
 }

@@ -10,9 +10,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // Keep the animation library in its own chunk so the first paint stays light.
-          motion: ['framer-motion'],
-          router: ['react-router-dom'],
+          // Keep the animation library in its own cacheable chunk.
+          gsap: ['gsap'],
         },
       },
     },

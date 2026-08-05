@@ -1,9 +1,9 @@
 {
   "name": "water-rs",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
-  "description": "water-rs — light, mobile-first e-commerce storefront with a built-in admin panel.",
+  "description": "water-rs — односторінковий лендинг помпи для води Redsack.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -11,10 +11,9 @@
     "deploy": "npm run build && firebase deploy --only hosting"
   },
   "dependencies": {
-    "framer-motion": "^11.3.19",
+    "gsap": "^3.12.5",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

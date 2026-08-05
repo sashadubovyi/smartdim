@@ -28,6 +28,14 @@ export type IconName =
   | 'chevronDown'
   | 'card'
   | 'cash'
+  | 'bolt'
+  | 'mute'
+  | 'battery'
+  | 'droplet'
+  | 'clock'
+  | 'home'
+  | 'building'
+  | 'plug'
   | 'sparkle';
 
 const paths: Record<IconName, JSX.Element> = {
@@ -164,6 +172,51 @@ const paths: Record<IconName, JSX.Element> = {
       <line x1="18" y1="12" x2="18" y2="12" />
     </>
   ),
+  bolt: <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />,
+  mute: (
+    <>
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <line x1="22" y1="9" x2="16" y2="15" />
+      <line x1="16" y1="9" x2="22" y2="15" />
+    </>
+  ),
+  battery: (
+    <>
+      <rect x="2" y="7" width="16" height="10" rx="2" />
+      <line x1="22" y1="11" x2="22" y2="13" />
+      <path d="M11 9l-2 3h3l-2 3" />
+    </>
+  ),
+  droplet: <path d="M12 2.5 C 8 8, 6 11, 6 14 a6 6 0 0 0 12 0 c 0-3 -2-6 -6-11.5 Z" />,
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <polyline points="12 7 12 12 16 14" />
+    </>
+  ),
+  home: (
+    <>
+      <path d="M3 11 12 3l9 8" />
+      <path d="M5 10v10h14V10" />
+      <rect x="10" y="14" width="4" height="6" />
+    </>
+  ),
+  building: (
+    <>
+      <rect x="4" y="3" width="16" height="18" rx="1.5" />
+      <line x1="9" y1="7" x2="9" y2="7" />
+      <line x1="15" y1="7" x2="15" y2="7" />
+      <path d="M9 7h0M15 7h0M9 11h0M15 11h0M9 15h0M15 15h0" />
+      <rect x="10" y="17" width="4" height="4" />
+    </>
+  ),
+  plug: (
+    <>
+      <path d="M9 2v6M15 2v6" />
+      <path d="M7 8h10v3a5 5 0 0 1-10 0V8Z" />
+      <line x1="12" y1="16" x2="12" y2="22" />
+    </>
+  ),
   sparkle: <path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z" />,
 };
 
@@ -174,7 +227,9 @@ interface IconProps extends SVGProps<SVGSVGElement> {
 }
 
 export function Icon({ name, size = 22, filled = false, ...props }: IconProps) {
-  const solid = filled || ['telegram', 'whatsapp', 'viber', 'shield', 'star', 'phone', 'sparkle'].includes(name);
+  const solid =
+    filled ||
+    ['telegram', 'whatsapp', 'viber', 'shield', 'star', 'phone', 'sparkle', 'bolt', 'droplet'].includes(name);
   return (
     <svg
       width={size}
