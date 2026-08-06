@@ -14,7 +14,7 @@ export const SITE = {
 // замовлення. Отримати: кабінет Нової Пошти (bizness.novaposhta.ua) →
 // Налаштування → Безпека → «Ключі API» → створити ключ. Вставте його нижче.
 // Поки ключ не задано — поля працюють як звичайний ручний ввід.
-export const NOVA_POSHTA_API_KEY = 'PASTE_NP_KEY';
+export const NOVA_POSHTA_API_KEY = '4636a109cfb65c6402b66aef8d4705fb';
 export const isNpConfigured = !!NOVA_POSHTA_API_KEY && !NOVA_POSHTA_API_KEY.startsWith('PASTE');
 
 export const CONTACTS = {
