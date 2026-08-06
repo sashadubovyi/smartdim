@@ -1,0 +1,23 @@
+rules_version = '2';
+
+// Правила безпеки Firestore для water-rs.
+// Скопіюйте цей вміст у Firebase Console → Firestore Database → Rules → Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Замовлення: створювати може будь-хто (клієнт оформлює замовлення),
+    // а читати/змінювати/видаляти — лише авторизований адміністратор.
+    match /orders/{orderId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // Налаштування адміна: тут зберігається лише ЛОГІН (не пароль — пароль у
+    // Firebase Authentication). Логін читається публічно для звірки під час
+    // входу; змінювати може тільки авторизований адміністратор.
+    match /settings/admin {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}

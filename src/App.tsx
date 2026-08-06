@@ -19,22 +19,27 @@ import { Icon } from './components/icons/Icon';
 import { TopBar } from './components/TopBar';
 import { SiteFooter } from './components/SiteFooter';
 import { ContactModal } from './components/ContactModal';
+import { CheckoutModal } from './components/CheckoutModal';
+import { Admin } from './admin/Admin';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalHeading, setModalHeading] = useState('Замовити помпу');
+  // Lightweight routing: /admin renders the admin panel, everything else the
+  // landing page. Firebase Hosting rewrites all paths to index.html.
+  const path = window.location.pathname.replace(/\/+$/, '');
+  if (path === '/admin') return <Admin />;
+
+  return <Landing />;
+}
+
+function Landing() {
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  const openBuy = () => {
-    setModalHeading('Замовити помпу');
-    setModalOpen(true);
-  };
-  const openContact = () => {
-    setModalHeading('Зв’язатися з нами');
-    setModalOpen(true);
-  };
+  const openBuy = () => setCheckoutOpen(true);
+  const openContact = () => setContactOpen(true);
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -432,7 +437,8 @@ export default function App() {
         </button>
       </div>
 
-      <ContactModal open={modalOpen} heading={modalHeading} onClose={() => setModalOpen(false)} />
+      <CheckoutModal open={checkoutOpen} onClose={() => setCheckoutOpen(false)} />
+      <ContactModal open={contactOpen} heading="Зв’язатися з нами" onClose={() => setContactOpen(false)} />
     </div>
   );
 }
