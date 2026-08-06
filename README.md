@@ -55,6 +55,9 @@
 
 > Доки Firebase не налаштовано, форма працює у резервному режимі — надсилає замовлення у WhatsApp продавця.
 
+### Автопідбір відділень Нової Пошти (необовʼязково)
+Для методів «Відділення» та «Поштомат» Нової Пошти місто й відділення можуть підбиратися зі списку через офіційне API НП. Запити виконуються лише під час введення у формі (з debounce), тому на швидкість сайту не впливають. Щоб увімкнути — отримайте ключ у кабінеті **bizness.novaposhta.ua → Налаштування → Безпека → «Ключі API»** і вставте його у [`src/config.ts`](./src/config.ts) (`NOVA_POSHTA_API_KEY`). Без ключа поля лишаються звичайним ручним вводом. Для Укрпошти — ручний ввід (відділення/індекс).
+
 ### Одноразове налаштування Firebase
 1. **Web-config:** Firebase Console → проєкт `water-rs` → ⚙️ **Project settings → General → Your apps → Web app (`</>`)** → скопіюйте `firebaseConfig` і вставте у [`src/firebaseConfig.ts`](./src/firebaseConfig.ts) (значення `apiKey`, `messagingSenderId`, `appId`). Якщо Web-app ще немає — натисніть «Add app → Web».
 2. **Firestore:** Console → **Build → Firestore Database → Create database** (production). Далі вкладка **Rules** → вставте вміст [`firestore.rules`](./firestore.rules) → **Publish**.

@@ -10,6 +10,13 @@ export const SITE = {
   currency: '₴',
 };
 
+// Ключ API Нової Пошти для автопідбору міст/відділень/поштоматів у формі
+// замовлення. Отримати: кабінет Нової Пошти (bizness.novaposhta.ua) →
+// Налаштування → Безпека → «Ключі API» → створити ключ. Вставте його нижче.
+// Поки ключ не задано — поля працюють як звичайний ручний ввід.
+export const NOVA_POSHTA_API_KEY = 'PASTE_NP_KEY';
+export const isNpConfigured = !!NOVA_POSHTA_API_KEY && !NOVA_POSHTA_API_KEY.startsWith('PASTE');
+
 export const CONTACTS = {
   phone: '+380975581823',
   telegram: 'waterrs', // нік без @ — ⚠️ замініть на реальний за потреби

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { PRODUCT, SITE, CONTACTS } from '../config';
+import { PRODUCT, SITE, CONTACTS, isNpConfigured } from '../config';
 import { formatPrice, contactHref } from '../lib/format';
 import { submitOrder, paymentLabel, type DeliveryMethod, type PaymentOption } from '../lib/orders';
 import { isFirebaseConfigured } from '../lib/firebase';
+import { searchCities, searchWarehouses, type NpCity, type NpWarehouse } from '../lib/novaposhta';
+import { Autocomplete } from './Autocomplete';
 import { Icon } from './icons/Icon';
 
 interface CheckoutModalProps {
@@ -31,6 +33,7 @@ export function CheckoutModal({ open, onClose }: CheckoutModalProps) {
   const [qty, setQty] = useState(1);
   const [method, setMethod] = useState<DeliveryMethod>('Відділення Нова Пошта');
   const [city, setCity] = useState('');
+  const [cityRef, setCityRef] = useState(''); // NP CityRef для пошуку відділень
   const [details, setDetails] = useState('');
   const [payment, setPayment] = useState<PaymentOption>('full');
   const [busy, setBusy] = useState(false);
@@ -38,6 +41,13 @@ export function CheckoutModal({ open, onClose }: CheckoutModalProps) {
   const [done, setDone] = useState(false);
 
   const total = PRODUCT.price * qty;
+
+  const isNpMethod =
+    method === 'Відділення Нова Пошта' || method === 'Поштомат Нова Пошта' || method === "Кур'єр Нова Пошта";
+  const isLocker = method === 'Поштомат Нова Пошта';
+  const isWarehouseMethod = method === 'Відділення Нова Пошта' || method === 'Поштомат Нова Пошта';
+  const npCityEnabled = isNpConfigured && isNpMethod;
+  const npWarehouseEnabled = isNpConfigured && isWarehouseMethod;
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -178,7 +188,14 @@ export function CheckoutModal({ open, onClose }: CheckoutModalProps) {
               {/* Delivery method */}
               <div>
                 <label className="mb-1 block text-xs font-semibold text-ink-soft">Спосіб доставки *</label>
-                <select className="field" value={method} onChange={(e) => setMethod(e.target.value as DeliveryMethod)}>
+                <select
+                  className="field"
+                  value={method}
+                  onChange={(e) => {
+                    setMethod(e.target.value as DeliveryMethod);
+                    setDetails('');
+                  }}
+                >
                   {DELIVERY_METHODS.map((m) => (
                     <option key={m} value={m}>
                       {m}
@@ -189,11 +206,43 @@ export function CheckoutModal({ open, onClose }: CheckoutModalProps) {
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
                   <label className="mb-1 block text-xs font-semibold text-ink-soft">Місто *</label>
-                  <input className="field" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Київ" />
+                  {npCityEnabled ? (
+                    <Autocomplete<NpCity>
+                      value={city}
+                      onChange={(v) => {
+                        setCity(v);
+                        setCityRef('');
+                      }}
+                      onPick={(c) => {
+                        setCity(c.name);
+                        setCityRef(c.ref);
+                        setDetails('');
+                      }}
+                      fetcher={searchCities}
+                      getLabel={(c) => c.name}
+                      getSub={(c) => c.area}
+                      placeholder="Почніть вводити місто"
+                    />
+                  ) : (
+                    <input className="field" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Київ" />
+                  )}
                 </div>
                 <div>
                   <label className="mb-1 block text-xs font-semibold text-ink-soft">{detailsLabel[method]} *</label>
-                  <input className="field" value={details} onChange={(e) => setDetails(e.target.value)} placeholder={detailsLabel[method]} />
+                  {npWarehouseEnabled ? (
+                    <Autocomplete<NpWarehouse>
+                      value={details}
+                      onChange={setDetails}
+                      onPick={(w) => setDetails(w.description)}
+                      fetcher={(q) => searchWarehouses(cityRef, q, isLocker)}
+                      getLabel={(w) => w.description}
+                      getSub={(w) => `№${w.number}`}
+                      disabled={!cityRef}
+                      placeholder={cityRef ? 'Введіть номер або адресу' : 'Спочатку оберіть місто'}
+                    />
+                  ) : (
+                    <input className="field" value={details} onChange={(e) => setDetails(e.target.value)} placeholder={detailsLabel[method]} />
+                  )}
                 </div>
               </div>
 
