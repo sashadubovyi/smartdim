@@ -15,12 +15,12 @@
 // ─────────────────────────────────────────────────────────────────────────
 
 export const firebaseConfig = {
-  apiKey: 'PASTE_API_KEY',
+  apiKey: 'AIzaSyAIdIseudIZmZ0ZfX6GsU3dR0Xq_ho5zzg',
   authDomain: 'water-rs.firebaseapp.com',
   projectId: 'water-rs',
   storageBucket: 'water-rs.appspot.com',
-  messagingSenderId: 'PASTE_SENDER_ID',
-  appId: 'PASTE_APP_ID',
+  messagingSenderId: '675002614471',
+  appId: '1:675002614471:web:4ca365c9eca37a6552f4e2',
 };
 
 /** true, коли конфіг заповнено (не плейсхолдери). */
