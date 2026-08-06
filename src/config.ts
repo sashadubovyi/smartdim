@@ -19,7 +19,7 @@ export const isNpConfigured = !!NOVA_POSHTA_API_KEY && !NOVA_POSHTA_API_KEY.star
 
 export const CONTACTS = {
   phone: '+380975581823',
-  telegram: 'waterrs', // нік без @ — ⚠️ замініть на реальний за потреби
+  telegram: '+380975581823', // t.me/+<номер> відкриває чат за номером
   whatsapp: '+380975581823',
   viber: '+380975581823',
 };
