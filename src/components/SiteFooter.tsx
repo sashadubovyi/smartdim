@@ -9,7 +9,6 @@ interface SiteFooterProps {
 const channels: { kind: keyof typeof CONTACTS; icon: IconName; label: string }[] = [
   { kind: 'phone', icon: 'phone', label: 'Телефон' },
   { kind: 'telegram', icon: 'telegram', label: 'Telegram' },
-  { kind: 'whatsapp', icon: 'whatsapp', label: 'WhatsApp' },
   { kind: 'viber', icon: 'viber', label: 'Viber' },
 ];
 
@@ -25,7 +24,7 @@ export function SiteFooter({ onContact }: SiteFooterProps) {
           {PRODUCT.name}. Прямий імпорт, гарантія та швидка доставка по всій Україні. Понад 10 років на ринку.
         </p>
 
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:max-w-lg sm:grid-cols-4">
+        <div className="mt-6 grid grid-cols-3 gap-3 sm:max-w-md">
           {channels.map((c) => (
             <a
               key={c.kind}

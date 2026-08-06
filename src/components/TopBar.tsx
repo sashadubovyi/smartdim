@@ -9,7 +9,6 @@ interface TopBarProps {
 const links: { kind: keyof typeof CONTACTS; icon: IconName; label: string }[] = [
   { kind: 'phone', icon: 'phone', label: 'Телефон' },
   { kind: 'telegram', icon: 'telegram', label: 'Telegram' },
-  { kind: 'whatsapp', icon: 'whatsapp', label: 'WhatsApp' },
   { kind: 'viber', icon: 'viber', label: 'Viber' },
 ];
 

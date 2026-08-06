@@ -12,7 +12,6 @@ interface ContactModalProps {
 const channels: { kind: keyof typeof CONTACTS; icon: IconName; label: string; accent: string }[] = [
   { kind: 'phone', icon: 'phone', label: 'Подзвонити', accent: 'bg-brand text-white' },
   { kind: 'telegram', icon: 'telegram', label: 'Telegram', accent: 'bg-[#2aabee] text-white' },
-  { kind: 'whatsapp', icon: 'whatsapp', label: 'WhatsApp', accent: 'bg-[#25d366] text-white' },
   { kind: 'viber', icon: 'viber', label: 'Viber', accent: 'bg-[#7360f2] text-white' },
 ];
 
@@ -39,9 +38,9 @@ export function ContactModal({ open, onClose, heading = 'Замовити пом
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     // No backend on a static site — deliver the lead straight to the seller's
-    // WhatsApp with the order details prefilled.
+    // Viber with the details prefilled.
     const text = `Замовлення: ${PRODUCT.name}\nІм'я: ${name || '—'}\nТелефон: ${phone || '—'}`;
-    window.open(contactHref('whatsapp', CONTACTS.whatsapp, text), '_blank', 'noopener');
+    window.open(contactHref('viber', CONTACTS.viber, text), '_blank', 'noopener');
     setSent(true);
   }
 

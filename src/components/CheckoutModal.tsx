@@ -97,13 +97,13 @@ export function CheckoutModal({ open, onClose }: CheckoutModalProps) {
         qty,
       });
       if (!saved) {
-        // Firebase not configured yet — fall back to WhatsApp so the order
+        // Firebase not configured yet — fall back to Viber so the order
         // still reaches the seller.
-        window.open(contactHref('whatsapp', CONTACTS.whatsapp, orderText()), '_blank', 'noopener');
+        window.open(contactHref('viber', CONTACTS.viber, orderText()), '_blank', 'noopener');
       }
       setDone(true);
     } catch {
-      setError('Не вдалося зберегти замовлення. Спробуйте ще раз або напишіть нам у WhatsApp.');
+      setError('Не вдалося зберегти замовлення. Спробуйте ще раз або напишіть нам у Viber.');
     } finally {
       setBusy(false);
     }
@@ -287,7 +287,7 @@ export function CheckoutModal({ open, onClose }: CheckoutModalProps) {
               </button>
               {!isFirebaseConfigured && (
                 <p className="text-center text-[11px] text-ink-muted">
-                  Замовлення буде надіслано у WhatsApp продавця.
+                  Замовлення буде надіслано у Viber продавця.
                 </p>
               )}
             </form>
