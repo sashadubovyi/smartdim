@@ -27,7 +27,9 @@ export function contactHref(
     case 'whatsapp':
       return `https://wa.me/${digits.replace(/^\+/, '')}${text ? `?text=${text}` : ''}`;
     case 'viber':
-      // Viber deep link needs the number in international format WITHOUT "+".
-      return `viber://chat?number=${digits.replace(/^\+/, '')}${text ? `&text=${text}` : ''}`;
+      // "chat?number=" is restricted for personal numbers; "add?number=" is the
+      // reliable deep link — opens Viber on the contact so the user can message.
+      // Number must be international format without "+".
+      return `viber://add?number=${digits.replace(/^\+/, '')}`;
   }
 }
