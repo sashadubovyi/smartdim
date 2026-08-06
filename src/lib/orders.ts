@@ -1,10 +1,10 @@
 import { getFirebase, isFirebaseConfigured } from './firebase';
 
 export type DeliveryMethod =
-  | "Кур'єр Нова Пошта"
   | 'Відділення Нова Пошта'
   | 'Поштомат Нова Пошта'
-  | 'Prom Доставка';
+  | "Кур'єр Нова Пошта"
+  | 'Укрпошта';
 
 export type PaymentOption = 'full' | 'prepay200';
 

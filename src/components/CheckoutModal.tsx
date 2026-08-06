@@ -11,18 +11,18 @@ interface CheckoutModalProps {
 }
 
 const DELIVERY_METHODS: DeliveryMethod[] = [
-  "Кур'єр Нова Пошта",
   'Відділення Нова Пошта',
   'Поштомат Нова Пошта',
-  'Prom Доставка',
+  "Кур'єр Нова Пошта",
+  'Укрпошта',
 ];
 
 // Label for the free-text details field depending on the chosen method.
 const detailsLabel: Record<DeliveryMethod, string> = {
-  "Кур'єр Нова Пошта": 'Адреса (вулиця, будинок, квартира)',
   'Відділення Нова Пошта': 'Номер відділення',
   'Поштомат Нова Пошта': 'Номер поштомата',
-  'Prom Доставка': 'Коментар до доставки',
+  "Кур'єр Нова Пошта": 'Адреса (вулиця, будинок, квартира)',
+  'Укрпошта': 'Відділення або поштовий індекс',
 };
 
 export function CheckoutModal({ open, onClose }: CheckoutModalProps) {
