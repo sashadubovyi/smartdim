@@ -11,11 +11,10 @@ export const SITE = {
 };
 
 export const CONTACTS = {
-  // ⚠️ Замініть на реальні дані перед запуском.
-  phone: '+380000000000',
-  telegram: 'waterrs', // нік без @
-  whatsapp: '+380000000000',
-  viber: '+380000000000',
+  phone: '+380975581823',
+  telegram: 'waterrs', // нік без @ — ⚠️ замініть на реальний за потреби
+  whatsapp: '+380975581823',
+  viber: '+380975581823',
 };
 
 export const PRODUCT = {
